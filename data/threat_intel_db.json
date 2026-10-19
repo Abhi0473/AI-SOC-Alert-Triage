@@ -1,0 +1,31 @@
+{
+  "_comment": "Local mock threat-intel database used when no live API key (ABUSEIPDB_API_KEY / VT_API_KEY) is configured. Mirrors the kind of response VirusTotal/AbuseIPDB would return.",
+  "185.220.101.50": {
+    "verdict": "malicious",
+    "reputation": "high_risk",
+    "categories": ["malware", "c2"],
+    "abuse_confidence_score": 92,
+    "source": "mock_local_db"
+  },
+  "45.146.164.110": {
+    "verdict": "malicious",
+    "reputation": "high_risk",
+    "categories": ["c2", "botnet"],
+    "abuse_confidence_score": 97,
+    "source": "mock_local_db"
+  },
+  "10.0.0.5": {
+    "verdict": "benign",
+    "reputation": "internal",
+    "categories": [],
+    "abuse_confidence_score": 0,
+    "source": "mock_local_db"
+  },
+  "8.8.8.8": {
+    "verdict": "benign",
+    "reputation": "clean",
+    "categories": [],
+    "abuse_confidence_score": 0,
+    "source": "mock_local_db"
+  }
+}

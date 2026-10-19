@@ -1,0 +1,270 @@
+[
+  {
+    "alert_id": "ALERT-EVT-1001",
+    "source_event_id": "EVT-1001",
+    "created_at": "2026-09-15T10:52:44.261724+00:00",
+    "original_timestamp": "2026-09-10T14:22:01Z",
+    "host": "WIN-CLIENT01",
+    "user": "jdoe",
+    "process": "powershell.exe",
+    "parent_process": "explorer.exe",
+    "command_line": "powershell.exe -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQA...",
+    "destination_ip": "185.220.101.50",
+    "critical_asset": false,
+    "fired_rules": [
+      {
+        "rule_id": "suspicious_encoded_powershell",
+        "rule_name": "Suspicious Encoded PowerShell Execution",
+        "description": "Process 'powershell.exe' was launched with an encoded command argument (-enc / -EncodedCommand)."
+      },
+      {
+        "rule_id": "suspicious_outbound_connection",
+        "rule_name": "Suspicious Outbound Connection",
+        "description": "Connection observed to 185.220.101.50, which threat intelligence rates as 'high_risk' (categories: malware, c2)."
+      }
+    ],
+    "ground_truth_verdict": "malicious",
+    "ground_truth_notes": "Encoded PowerShell launched interactively from Explorer, beaconing to a known C2/malware IP.",
+    "enrichment": {
+      "ip_reputation": {
+        "verdict": "malicious",
+        "reputation": "high_risk",
+        "categories": [
+          "malware",
+          "c2"
+        ],
+        "abuse_confidence_score": 92,
+        "source": "mock_local_db"
+      },
+      "mitre": [
+        {
+          "technique_id": "T1059.001",
+          "technique_name": "Command and Scripting Interpreter: PowerShell",
+          "tactic": "Execution"
+        },
+        {
+          "technique_id": "T1071.001",
+          "technique_name": "Application Layer Protocol: Web Protocols",
+          "tactic": "Command and Control"
+        }
+      ]
+    },
+    "risk": {
+      "score": 95,
+      "severity": "critical",
+      "breakdown": {
+        "base_severity": 30,
+        "malicious_ip_reputation": 25,
+        "known_c2_indicator": 20,
+        "encoded_powershell": 20
+      }
+    },
+    "ai_analysis": {
+      "verdict": "escalate",
+      "confidence": "high",
+      "evidence": [
+        "Process 'powershell.exe' was launched with an encoded command argument (-enc / -EncodedCommand).",
+        "Connection observed to 185.220.101.50, which threat intelligence rates as 'high_risk' (categories: malware, c2).",
+        "Destination IP 185.220.101.50 has a malicious reputation (categories: malware, c2).",
+        "Deterministic risk score is 95 (critical severity)."
+      ],
+      "recommended_actions": [
+        "Review the process command line and parent/child process tree.",
+        "Investigate destination IP 185.220.101.50 and any related connections.",
+        "Search for other hosts showing T1059.001 activity.",
+        "Review the user's recent authentication activity."
+      ],
+      "_mode": "mock"
+    },
+    "analyst_verdict": "pending_review",
+    "_pipeline_compute_time_ms": 0.05
+  },
+  {
+    "alert_id": "ALERT-EVT-1002",
+    "source_event_id": "EVT-1002",
+    "created_at": "2026-09-15T10:52:44.261765+00:00",
+    "original_timestamp": "2026-09-10T15:03:44Z",
+    "host": "WIN-CLIENT02",
+    "user": "asmith",
+    "process": "updater_svc.exe",
+    "parent_process": "svchost.exe",
+    "command_line": "N/A",
+    "destination_ip": "45.146.164.110",
+    "critical_asset": false,
+    "fired_rules": [
+      {
+        "rule_id": "suspicious_outbound_connection",
+        "rule_name": "Suspicious Outbound Connection",
+        "description": "Connection observed to 45.146.164.110, which threat intelligence rates as 'high_risk' (categories: c2, botnet)."
+      }
+    ],
+    "ground_truth_verdict": "malicious",
+    "ground_truth_notes": "Unrecognized process beaconing outbound to a known botnet/C2 IP; no PowerShell involved.",
+    "enrichment": {
+      "ip_reputation": {
+        "verdict": "malicious",
+        "reputation": "high_risk",
+        "categories": [
+          "c2",
+          "botnet"
+        ],
+        "abuse_confidence_score": 97,
+        "source": "mock_local_db"
+      },
+      "mitre": [
+        {
+          "technique_id": "T1071.001",
+          "technique_name": "Application Layer Protocol: Web Protocols",
+          "tactic": "Command and Control"
+        }
+      ]
+    },
+    "risk": {
+      "score": 75,
+      "severity": "high",
+      "breakdown": {
+        "base_severity": 30,
+        "malicious_ip_reputation": 25,
+        "known_c2_indicator": 20
+      }
+    },
+    "ai_analysis": {
+      "verdict": "escalate",
+      "confidence": "high",
+      "evidence": [
+        "Connection observed to 45.146.164.110, which threat intelligence rates as 'high_risk' (categories: c2, botnet).",
+        "Destination IP 45.146.164.110 has a malicious reputation (categories: c2, botnet).",
+        "Deterministic risk score is 75 (high severity)."
+      ],
+      "recommended_actions": [
+        "Review the process command line and parent/child process tree.",
+        "Investigate destination IP 45.146.164.110 and any related connections.",
+        "Search for other hosts showing T1071.001 activity.",
+        "Review the user's recent authentication activity."
+      ],
+      "_mode": "mock"
+    },
+    "analyst_verdict": "pending_review",
+    "_pipeline_compute_time_ms": 0.02
+  },
+  {
+    "alert_id": "ALERT-EVT-1003",
+    "source_event_id": "EVT-1003",
+    "created_at": "2026-09-15T10:52:44.261788+00:00",
+    "original_timestamp": "2026-09-10T02:00:07Z",
+    "host": "WIN-SRV01",
+    "user": "svc_admin",
+    "process": "powershell.exe",
+    "parent_process": "taskeng.exe",
+    "command_line": "powershell.exe -enc UwB0AGEAcgB0AC0AQgBhAGMAawB1AHAAUwBjAHIAaQBwAHQA...",
+    "destination_ip": "10.0.0.5",
+    "critical_asset": true,
+    "fired_rules": [
+      {
+        "rule_id": "suspicious_encoded_powershell",
+        "rule_name": "Suspicious Encoded PowerShell Execution",
+        "description": "Process 'powershell.exe' was launched with an encoded command argument (-enc / -EncodedCommand)."
+      }
+    ],
+    "ground_truth_verdict": "benign",
+    "ground_truth_notes": "Nightly backup script, launched by Task Scheduler under a service account, encoded for reliable argument passing (no wrapping-quote issues). Destination is the internal backup server.",
+    "enrichment": {
+      "ip_reputation": {
+        "verdict": "benign",
+        "reputation": "internal",
+        "categories": [],
+        "abuse_confidence_score": 0,
+        "source": "mock_local_db"
+      },
+      "mitre": [
+        {
+          "technique_id": "T1059.001",
+          "technique_name": "Command and Scripting Interpreter: PowerShell",
+          "tactic": "Execution"
+        }
+      ]
+    },
+    "risk": {
+      "score": 65,
+      "severity": "high",
+      "breakdown": {
+        "base_severity": 30,
+        "encoded_powershell": 20,
+        "critical_asset_involved": 15
+      }
+    },
+    "ai_analysis": {
+      "verdict": "escalate",
+      "confidence": "high",
+      "evidence": [
+        "Process 'powershell.exe' was launched with an encoded command argument (-enc / -EncodedCommand).",
+        "Deterministic risk score is 65 (high severity).",
+        "This event involves a critical asset."
+      ],
+      "recommended_actions": [
+        "Review the process command line and parent/child process tree.",
+        "Investigate destination IP 10.0.0.5 and any related connections.",
+        "Search for other hosts showing T1059.001 activity.",
+        "Review the user's recent authentication activity."
+      ],
+      "_mode": "mock"
+    },
+    "analyst_verdict": "pending_review",
+    "_pipeline_compute_time_ms": 0.02
+  },
+  {
+    "alert_id": "ALERT-EVT-1006",
+    "source_event_id": "EVT-1006",
+    "created_at": "2026-09-15T10:52:44.261818+00:00",
+    "original_timestamp": "2026-09-11T13:07:55Z",
+    "host": "WIN-CLIENT05",
+    "user": "tking",
+    "process": "custom_agent.exe",
+    "parent_process": "explorer.exe",
+    "command_line": "N/A",
+    "destination_ip": "203.0.113.77",
+    "critical_asset": false,
+    "fired_rules": [
+      {
+        "rule_id": "unconfirmed_reputation_outbound",
+        "rule_name": "Outbound Connection to Unconfirmed-Reputation IP",
+        "description": "Connection observed to 203.0.113.77, which has NO threat-intel history (neither confirmed malicious nor confirmed clean). Flagged for visibility, not treated as confirmed-bad."
+      }
+    ],
+    "ground_truth_verdict": "benign",
+    "ground_truth_notes": "Destination IP has no entry in the threat-intel source (neither confirmed malicious nor confirmed clean). Used to test that the pipeline treats 'unknown' reputation as its own category rather than silently defaulting to 'benign'.",
+    "enrichment": {
+      "ip_reputation": {
+        "verdict": "unknown",
+        "reputation": "no_data",
+        "categories": [],
+        "abuse_confidence_score": 0,
+        "source": "mock_local_db_no_entry"
+      },
+      "mitre": []
+    },
+    "risk": {
+      "score": 10,
+      "severity": "low",
+      "breakdown": {
+        "unconfirmed_reputation": 10
+      }
+    },
+    "ai_analysis": {
+      "verdict": "close_as_benign",
+      "confidence": "medium",
+      "evidence": [
+        "Connection observed to 203.0.113.77, which has NO threat-intel history (neither confirmed malicious nor confirmed clean). Flagged for visibility, not treated as confirmed-bad.",
+        "Deterministic risk score is 10 (low severity)."
+      ],
+      "recommended_actions": [
+        "Review the process command line and parent/child process tree.",
+        "Investigate destination IP 203.0.113.77 and any related connections.",
+        "Review the user's recent authentication activity."
+      ],
+      "_mode": "mock"
+    },
+    "analyst_verdict": "pending_review",
+    "_pipeline_compute_time_ms": 0.02
+  }
+]

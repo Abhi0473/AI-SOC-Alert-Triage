@@ -1,0 +1,13 @@
+{
+  "_comment": "Fixed lookup table. The detection/enrichment layer assigns MITRE technique IDs. The LLM is only ever given a technique from this table -- it never selects or invents one.",
+  "suspicious_encoded_powershell": {
+    "technique_id": "T1059.001",
+    "technique_name": "Command and Scripting Interpreter: PowerShell",
+    "tactic": "Execution"
+  },
+  "suspicious_outbound_connection": {
+    "technique_id": "T1071.001",
+    "technique_name": "Application Layer Protocol: Web Protocols",
+    "tactic": "Command and Control"
+  }
+}

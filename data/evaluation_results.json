@@ -1,0 +1,80 @@
+{
+  "rows": [
+    {
+      "event_id": "EVT-1001",
+      "alert_id": "ALERT-EVT-1001",
+      "host": "WIN-CLIENT01",
+      "ground_truth": "malicious",
+      "risk_score": 95,
+      "severity": "critical",
+      "ai_verdict": "escalate",
+      "outcome": "TP",
+      "pipeline_compute_time_ms": 0.05
+    },
+    {
+      "event_id": "EVT-1002",
+      "alert_id": "ALERT-EVT-1002",
+      "host": "WIN-CLIENT02",
+      "ground_truth": "malicious",
+      "risk_score": 75,
+      "severity": "high",
+      "ai_verdict": "escalate",
+      "outcome": "TP",
+      "pipeline_compute_time_ms": 0.02
+    },
+    {
+      "event_id": "EVT-1003",
+      "alert_id": "ALERT-EVT-1003",
+      "host": "WIN-SRV01",
+      "ground_truth": "benign",
+      "risk_score": 65,
+      "severity": "high",
+      "ai_verdict": "escalate",
+      "outcome": "FP",
+      "pipeline_compute_time_ms": 0.02
+    },
+    {
+      "event_id": "EVT-1004",
+      "alert_id": "-",
+      "host": "WIN-CLIENT03",
+      "ground_truth": "benign",
+      "risk_score": 0,
+      "severity": "n/a",
+      "ai_verdict": "no_alert_generated",
+      "outcome": "TN",
+      "pipeline_compute_time_ms": 0.0
+    },
+    {
+      "event_id": "EVT-1005",
+      "alert_id": "-",
+      "host": "WIN-CLIENT04",
+      "ground_truth": "benign",
+      "risk_score": 0,
+      "severity": "n/a",
+      "ai_verdict": "no_alert_generated",
+      "outcome": "TN",
+      "pipeline_compute_time_ms": 0.0
+    },
+    {
+      "event_id": "EVT-1006",
+      "alert_id": "ALERT-EVT-1006",
+      "host": "WIN-CLIENT05",
+      "ground_truth": "benign",
+      "risk_score": 10,
+      "severity": "low",
+      "ai_verdict": "close_as_benign",
+      "outcome": "TN",
+      "pipeline_compute_time_ms": 0.02
+    }
+  ],
+  "summary": {
+    "total_labeled_events": 6,
+    "alerts_generated": 4,
+    "tp": 2,
+    "fp": 1,
+    "fn": 0,
+    "tn": 3,
+    "escalation_rate_pct": 50.0,
+    "avg_pipeline_compute_time_ms": 0.03
+  }
+}
